@@ -162,7 +162,7 @@ class BITalino(object):
         """
         Sends a command to the BITalino device.
         """
-        time.sleep(0.3)
+        time.sleep(0.1)
         if self.serial:
             self.socket.write(chr(data))
         else:
