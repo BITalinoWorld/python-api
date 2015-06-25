@@ -4,6 +4,8 @@
    :synopsis: BITalino API
 
 *Created on Fri Jun 20 2014*
+
+*Last Modified on Thur Jun 25 2015*
 """
 
 import platform
@@ -222,21 +224,21 @@ class BITalino(object):
         else:
             raise Exception(ExceptionCode.DEVICE_NOT_IDLE)
         
-    def analog(self, analogOutput = 100):
+    def pwm(self, pwmOutput = 100):
         """
-        :param analogOutput: value for the analog output
-        :type analogOutput: int
-        :raises Exception: invalid analog output value
+        :param pwmOutput: value for the pwm output
+        :type pwmOutput: int
+        :raises Exception: invalid pwm output value
         :raises Exception: device is not a BITalino 2.0
         
-        Sets the analog output for the BITalino 2.0 device. Implies the use of the method :meth:`send`. 
+        Sets the pwm output for the BITalino 2.0 device. Implies the use of the method :meth:`send`. 
         
-        Possible values for parameter *analogOutput*: 0 - 255.
+        Possible values for parameter *pwmOutput*: 0 - 255.
         """
         if (self.isBitalino2):
-            if 0 <= int(analogOutput) <= 255:
+            if 0 <= int(pwmOutput) <= 255:
                 self.send(163)
-                self.send(analogOutput)
+                self.send(pwmOutput)
             else:
                 raise Exception(ExceptionCode.INVALID_PARAMETER)
         else:
