@@ -486,11 +486,6 @@ class BITalino(object):
                         raise Exception(ExceptionCode.CONTACTING_DEVICE)
                 data += self.socket.recv(1)      
         return data
-    
-    def test(self):
-        self.start(10)
-        while True:
-            print self.read(1)
             
 if __name__ == '__main__':
     macAddress = "00:00:00:00:00:00"
