@@ -78,7 +78,6 @@ class BITalino(object):
                 import bluetooth
                 self.socket = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
                 self.socket.connect((macAddress, 1))
-                self.socket.setblocking(False)
                 self.serial = False     
             else:
                 raise Exception(ExceptionCode.INVALID_PLATFORM)
