@@ -88,7 +88,14 @@ class BITalino(object):
             raise Exception(ExceptionCode.INVALID_ADDRESS)
         self.started = False
         self.macAddress = macAddress
-        self.isBitalino2 = True if float(self.version().split('_v')[1][:3]) >= 4.2 else False
+        split_string = '_v'
+        split_string_old = 'V'
+        version = self.version()
+        if split_string in version:
+            version_nbr = float(version.split(split_string)[1][:3])
+        else:
+            version_nbr = float(version.split(split_string_old)[1][:3])
+        self.isBitalino2 = True if version_nbr >= 4.2 else False
     
     def start(self, SamplingRate = 1000, analogChannels = [0, 1, 2, 3, 4, 5]):
         """
