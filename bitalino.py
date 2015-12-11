@@ -24,7 +24,10 @@ def find():
     Searches for bluetooth devices nearby.
     """
     if platform.system() == 'Windows' or platform.system() == 'Linux':
-        import bluetooth
+        try:
+            import bluetooth
+        except Exception, e:
+            raise Exception(ExceptionCode.IMPORT_FAILED + str(e))
         nearby_devices = bluetooth.discover_devices(lookup_names=True)
         return nearby_devices
     else:
@@ -38,6 +41,7 @@ class ExceptionCode():
     DEVICE_NOT_IN_ACQUISITION = "The device is not in acquisition mode." 
     INVALID_PARAMETER = "Invalid parameter."
     INVALID_VERSION = "Only available for Bitalino 2.0."
+    IMPORT_FAILED = "Please connect using the Virtual COM Port or confirm that PyBluez is installed; bluetooth wrapper failed to import with error: "
 
 class BITalino(object):
     """
@@ -75,7 +79,10 @@ class BITalino(object):
                 raise Exception(ExceptionCode.INVALID_PARAMETER)
         if (checkMatch):
             if platform.system() == 'Windows' or platform.system() == 'Linux':
-                import bluetooth
+                try:
+                    import bluetooth
+                except Exception, e:
+                    raise Exception(ExceptionCode.IMPORT_FAILED + str(e))
                 self.socket = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
                 self.socket.connect((macAddress, 1))
                 self.serial = False     
